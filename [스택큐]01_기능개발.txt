@@ -1,0 +1,36 @@
+import java.util.*;
+
+class Solution {
+    public int[] solution(int[] progresses, int[] speeds) {
+        
+        Stack<Integer> stk = new Stack<Integer>();
+        
+        // 남은일수(남은 진행률 / 진행속도) + 남은진행률%진행속도의 나머지가 0인지 아닌지
+        // 뒤에 식에서 나누어 떨어지지 않는 경우 즉 진도율이 100%가 되지않는경우  1일 추가
+        // case #1 0번방 9 1번방 3 3번방 7
+        for(int i=progresses.length-1;i>=0;i--){
+            stk.add((100-progresses[i]) / speeds[i] + ((100-progresses[i]) % speeds[i] > 0 ? 1 : 0));
+        }
+        
+        List<Integer> al = new ArrayList<Integer>();
+            
+        while(!stk.isEmpty()){
+            int cnt = 1;            
+            int top = stk.pop();
+            //진도율은 100%가 되었지만 이전기능이 완료된후 같이 배포
+            while(!stk.isEmpty() && stk.peek() <=top){
+                cnt++;
+                stk.pop();
+            }    
+            al.add(cnt);
+        }
+        
+        int[] answer = new int[al.size()];
+        
+        for(int i=0; i<answer.length; i++){
+            answer[i] = al.get(i);        
+        }
+        
+        return answer;
+    }
+}
