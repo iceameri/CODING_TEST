@@ -1,0 +1,64 @@
+import java.util.HashMap; 
+import java.util.Iterator;
+import java.util.Arrays;
+
+class Solution {
+    int rating(int num) {
+        switch(num){
+            case 2: return 5;
+            case 3: return 4;
+            case 4: return 3;
+            case 5: return 2;
+            case 6: return 1;
+            default: return 6;        
+        }
+        
+    }
+    
+    public int[] solution(int[] lottos, int[] win_nums)  {
+        int[] answer = {0, 0};
+        int max_reward = 0;
+        int min_reward = 0;
+        int unknownCnt = 0;
+        int correct = 0;
+        
+        Arrays.sort(lottos);
+        Arrays.sort(win_nums);
+
+
+        
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for(int i=0; i<win_nums.length; i++){
+            map.put(i, win_nums[i]);
+            // 모르는번호 갯수
+            if(lottos[i] == 0){
+                unknownCnt++;
+            }
+        }
+        Iterator<Integer> it = map.values().iterator();
+        
+        while(it.hasNext()){
+            int num = it.next().intValue();
+            int i = 0;
+            if(num == lottos[i]){
+                correct++;
+            }            
+            i++;
+        }
+        System.out.println(correct  );
+        System.out.println(unknownCnt);
+        System.out.println(correct + unknownCnt);
+        
+        System.out.println("max_reward "+rating(correct + unknownCnt));
+        System.out.println("min_reward "+rating(correct));
+        
+        max_reward = rating(correct + unknownCnt);
+        min_reward = rating(correct);
+        
+        answer[0] = max_reward;      
+        answer[1] = min_reward;      
+        
+        
+        return answer;
+    }
+}
