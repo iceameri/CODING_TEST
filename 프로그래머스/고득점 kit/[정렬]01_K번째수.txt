@@ -16,3 +16,7 @@ class Solution {
         return answer;
     }
 }
+<!--
+copyOfRange(arr,startidx,endidx)
+이 메소드는 첫 번째 매개변수로 복사할 원본 배열을 받고, 두 번째 매개변수로 시작 인덱스, 세 번째 매개변수로 마지막 복사될 배열 인덱스+1을 받아서 원본 배열과 같은 타입의 복사된 새로운 배열을 반환해준다
+-->
